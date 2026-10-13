@@ -1,0 +1,16 @@
+This application includes AndroidX components from the Android Open Source Project:
+
+AndroidX WebKit 1.12.1
+AndroidX Core 1.1.0
+AndroidX Annotation JVM 1.8.1
+AndroidX Lifecycle Common and Runtime 2.0.0
+AndroidX Arch Core Common and Runtime 2.0.0
+AndroidX Collection 1.0.0
+AndroidX VersionedParcelable 1.1.0
+
+Copyright The Android Open Source Project and contributors.
+These components are licensed under the Apache License, Version 2.0.
+The license is included in Apache-2.0.txt next to this notice inside the APK assets.
+
+Source and release information: https://android.googlesource.com/platform/frameworks/support/
+Artifact repository: https://dl.google.com/dl/android/maven2/

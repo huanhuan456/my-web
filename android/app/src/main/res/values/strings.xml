@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">积分卡</string>
+    <color name="icon_background">#31745f</color>
+    <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">sans</item>
+        <item name="android:colorAccent">#31745f</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">#f6f7f2</item>
+        <item name="android:navigationBarColor">#f6f7f2</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">#f6f7f2</item>
+    </style>
+</resources>

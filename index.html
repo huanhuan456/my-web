@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f6f7f2" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="积分卡" />
+    <title>积分卡 · 学习打卡</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="主导航">
+        <div class="brand-lockup">
+          <div class="brand-mark" aria-hidden="true">+1</div>
+          <div>
+            <strong>积分卡</strong>
+            <span>每日一点点，积累大成长</span>
+          </div>
+        </div>
+
+        <nav class="primary-nav">
+          <button class="nav-item is-active" type="button" data-view-target="week">
+            <span class="nav-icon" aria-hidden="true">▦</span>
+            <span>本周课程</span>
+          </button>
+          <button class="nav-item" type="button" data-view-target="details">
+            <span class="nav-icon" aria-hidden="true">≡</span>
+            <span>积分明细</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="child-chip">
+            <div class="avatar avatar-small">瑶</div>
+            <div>
+              <strong>瑶瑶</strong>
+              <span>今天也要加油</span>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="mobile-brand">
+            <div class="brand-mark" aria-hidden="true">+1</div>
+            <strong>积分卡</strong>
+          </div>
+          <div class="week-heading">
+            <span class="eyebrow">瑶瑶的学习记录</span>
+            <h1 id="page-title">积分卡</h1>
+          </div>
+          <div class="topbar-actions">
+            <span class="sync-status is-hidden" id="sync-status" role="status" aria-live="polite"></span>
+            <button class="install-button is-hidden" id="android-sync-button" type="button">同步设置</button>
+            <button class="install-button is-hidden" id="update-app-button" type="button">更新</button>
+            <button class="install-button is-hidden" id="install-app-button" type="button" aria-label="安装积分卡">安装</button>
+            <div class="profile-menu">
+              <div class="avatar">瑶</div>
+              <div class="profile-copy">
+                <strong>瑶瑶</strong>
+                <span>学习小达人</span>
+              </div>
+              <span class="chevron" aria-hidden="true">⌄</span>
+            </div>
+          </div>
+        </header>
+
+        <div class="content-wrap">
+          <section class="welcome-row">
+            <div>
+              <p class="date-line" id="current-date"></p>
+              <p class="muted-copy">完成课程后点击打卡，每次学习都能收获 1 分。</p>
+            </div>
+          </section>
+
+          <section class="overview-row" aria-label="快捷操作与积分概览">
+            <article class="summary-card summary-card-highlight">
+              <div class="summary-card-topline">
+                <span>累计积分</span>
+                <span class="summary-icon" aria-hidden="true">✦</span>
+              </div>
+              <strong id="total-points">0</strong>
+            </article>
+            <article class="summary-card weekly-actions-card">
+              <div class="summary-card-topline">
+                <span>本周完成</span>
+                <span class="summary-icon summary-icon-green" aria-hidden="true">✓</span>
+              </div>
+              <strong id="week-completed">0 / 0</strong>
+              <button class="primary-button overview-add" id="add-course-button" type="button">
+                <span aria-hidden="true">＋</span> 添加课程
+              </button>
+            </article>
+          </section>
+
+          <section class="week-section" id="week-view">
+            <div class="section-heading">
+              <div>
+                <div class="section-title-line">
+                  <h2>这周安排</h2>
+                  <span class="status-dot"></span>
+                  <span class="muted-label" id="week-range"></span>
+                </div>
+                <p class="muted-copy">每完成一节课，就为自己的成长加 1 分。</p>
+              </div>
+              <div class="week-controls" aria-label="切换周次">
+                <button class="icon-button light" id="previous-week" type="button" aria-label="上一周" title="上一周">‹</button>
+                <span class="week-label-button" id="week-label">本周</span>
+                <button class="icon-button light" id="next-week" type="button" aria-label="下一周" title="下一周">›</button>
+              </div>
+            </div>
+
+            <div class="week-board">
+              <div class="weekday-strip" id="weekday-strip" aria-label="一周日期"></div>
+              <div class="course-list" id="course-list"></div>
+            </div>
+          </section>
+
+          <section class="details-section is-hidden" id="details-view">
+            <div class="section-heading details-heading">
+              <div>
+                <div class="section-title-line">
+                  <h2>积分明细</h2>
+                  <span class="muted-label" id="details-count"></span>
+                </div>
+                <p class="muted-copy">每一次完成，都会留下清晰的成长记录。</p>
+              </div>
+              <label class="select-wrap">
+                <span class="sr-only">明细时间范围</span>
+                <select id="details-filter">
+                  <option value="all">全部记录</option>
+                  <option value="week">仅看本周</option>
+                </select>
+              </label>
+            </div>
+            <div class="details-summary" id="details-summary"></div>
+            <div class="ledger" id="ledger"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <nav class="mobile-nav" aria-label="移动端导航">
+      <button class="mobile-nav-item is-active" type="button" data-view-target="week">
+        <span aria-hidden="true">▦</span><span>课程</span>
+      </button>
+      <button class="mobile-nav-item" type="button" data-view-target="details">
+        <span aria-hidden="true">≡</span><span>明细</span>
+      </button>
+    </nav>
+
+    <div class="modal-backdrop is-hidden" id="course-modal" aria-hidden="true">
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <div>
+            <span class="eyebrow">安排一项学习</span>
+            <h2 id="modal-title">添加课程</h2>
+          </div>
+          <button class="icon-button light" id="close-modal" type="button" aria-label="关闭">×</button>
+        </div>
+        <form id="course-form">
+          <input id="course-id" name="courseId" type="hidden" />
+          <label class="form-field">
+            <span>课程名称</span>
+            <input id="course-title" name="title" type="text" placeholder="例如：英语绘本阅读" required maxlength="24" />
+          </label>
+          <label class="form-field">
+            <span>上课日期</span>
+            <input id="course-date" name="date" type="date" required />
+          </label>
+          <label class="form-field">
+            <span>学习内容</span>
+            <textarea id="course-note" name="note" placeholder="例如：Lesson 08 · 自然拼读练习" maxlength="80"></textarea>
+          </label>
+          <div class="modal-actions">
+            <button class="secondary-button" id="cancel-modal" type="button">取消</button>
+            <button class="primary-button" id="save-course-button" type="submit">保存课程</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <dialog class="modal install-dialog" id="install-help" aria-labelledby="install-help-title">
+      <div class="modal-header">
+        <h2 id="install-help-title">安装积分卡</h2>
+        <button class="icon-button light" id="close-install-help" type="button" aria-label="关闭安装说明">×</button>
+      </div>
+      <p class="install-help-copy" id="install-help-copy"></p>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="android.js"></script>
+    <script src="app.js"></script>
+    <script src="pwa.js"></script>
+  </body>
+</html>
